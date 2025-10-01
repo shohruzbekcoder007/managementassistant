@@ -1,0 +1,18 @@
+@mixin sidebar($width, $collapsed-width) {
+    width: $width;
+    transition: width 0.3s ease;
+
+    &.collapsed {
+        width: $collapsed-width;
+    }
+}
+
+@mixin contextcontainer($width, $collapsed-width) {
+    width: 100%;
+    transition: width 0.3s ease;
+    padding-left: $width;
+    &.collapsed {
+        width: 100%;
+        padding-left: $collapsed-width;
+    }
+}

@@ -1,0 +1,34 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/variables";
+
+.sidebar {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 0 18.472px 8.472px 0;
+  border: 0.924px solid $stroke-color;
+  background: $base-white-100;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  @include sidebar(228px, 70px);
+
+  
+  .sidebarHeader{
+    width: 100%;
+    height: 64.653px;
+  }
+  .sidebarFooter{
+    width: 100%;
+    height: 136px;
+  }
+
+  .sidebarNavList{
+    width: 100%;
+    height: calc(100% - 64.653px - 136px);
+    overflow-y: auto;
+  }
+
+}

@@ -1,0 +1,9 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/variables";
+
+.contextContainer {
+    @include contextcontainer(240px, 70px);
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
