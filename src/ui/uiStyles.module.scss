@@ -18,3 +18,35 @@
     height: 1px;
     background-color: $bg-divider;
 }
+
+
+.navListItem {
+    width: 100%;
+    height: 42px;
+    display: flex;
+    padding: 15px;
+    gap: 13px;
+    align-items: center;
+    justify-content: flex-start;
+
+    color: $base-shade-70;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 12.931px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.142px;
+    border-radius: 9.236px;
+    flex-shrink: 0;
+
+    &.active {
+        background-color: $active-nav-item-bg;
+        color: $nav-link-active-color;
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-size: 12.931px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.142px;
+    }   
+}

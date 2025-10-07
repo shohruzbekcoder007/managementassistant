@@ -1,3 +1,4 @@
+@use '../../assets/font/fonts.scss' as *;
 *,
 *::before,
 *::after {
@@ -7,6 +8,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Headings */
@@ -24,6 +26,18 @@ p {
 a {
   text-decoration: none;
 }
+
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul li, ol li {
+  margin: 0;
+  padding: 0;
 }
