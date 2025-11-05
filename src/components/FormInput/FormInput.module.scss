@@ -1,0 +1,56 @@
+@use "../../assets/styles/variables" as *;
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.label {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #E5E5E5;
+  background: $base-white-100;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $nav-link-active-color;
+    box-shadow: 0 0 0 3px rgba(27, 89, 248, 0.1);
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.inputError {
+  border-color: #ff4444;
+
+  &:focus {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
+  }
+}
+
+.errorMessage {
+  color: #ff4444;
+  font-size: 12px;
+  font-weight: 400;
+}

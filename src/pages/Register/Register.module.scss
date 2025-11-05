@@ -1,0 +1,65 @@
+@use "../../assets/styles/variables" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-color;
+  padding: 20px;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 450px;
+  background-color: $base-white-100;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: $base-shade-70;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  color: $nav-link-active-color;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.footerText {
+  font-size: 14px;
+  color: $base-shade-70;
+}

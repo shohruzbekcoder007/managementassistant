@@ -1,0 +1,70 @@
+@use "../../assets/styles/variables" as *;
+
+.button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background-color: $nav-link-active-color;
+  color: $base-white-100;
+
+  &:hover:not(:disabled) {
+    background-color: #0d47d9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(27, 89, 248, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.secondary {
+  background-color: #f5f5f5;
+  color: #333;
+
+  &:hover:not(:disabled) {
+    background-color: #e0e0e0;
+  }
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid $nav-link-active-color;
+  color: $nav-link-active-color;
+
+  &:hover:not(:disabled) {
+    background-color: rgba(27, 89, 248, 0.05);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.loader {
+  display: inline-block;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

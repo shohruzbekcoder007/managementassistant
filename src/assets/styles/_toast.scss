@@ -1,0 +1,72 @@
+// Custom Toast Styles
+@use "./variables" as *;
+
+// Override react-toastify default styles
+:global {
+  .Toastify__toast-container {
+    font-family: 'Inter', sans-serif;
+    z-index: 9999;
+  }
+
+  .Toastify__toast {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    padding: 16px;
+    min-height: 64px;
+  }
+
+  .Toastify__toast--success {
+    background-color: #10b981;
+    color: $base-white-100;
+  }
+
+  .Toastify__toast--error {
+    background-color: #ef4444;
+    color: $base-white-100;
+  }
+
+  .Toastify__toast--warning {
+    background-color: #f59e0b;
+    color: $base-white-100;
+  }
+
+  .Toastify__toast--info {
+    background-color: $nav-link-active-color;
+    color: $base-white-100;
+  }
+
+  .Toastify__progress-bar {
+    height: 3px;
+  }
+
+  .Toastify__progress-bar--success {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__progress-bar--error {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__progress-bar--warning {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__progress-bar--info {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__close-button {
+    color: $base-white-100;
+    opacity: 0.7;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .Toastify__toast-body {
+    padding: 0;
+    line-height: 1.5;
+  }
+}
