@@ -320,8 +320,361 @@ Barcha endpoint'lar `src/config/api_urls.ts` faylida saqlanadi:
 ```typescript
 import { API_URLS } from '../config/api_urls';
 
-console.log(API_URLS.AUTH.SIGNIN);     // /api/v1/auth/signin
-console.log(API_URLS.USER.ME);         // /api/v1/user/me
-console.log(API_URLS.ROLE.CREATE);     // /api/v1/role/create/
-console.log(API_URLS.ROLE.DETAIL('id')); // /api/v1/role/detail/id/
+console.log(API_URLS.AUTH.SIGNIN);        // /api/v1/auth/signin
+console.log(API_URLS.USER.ME);            // /api/v1/user/me
+console.log(API_URLS.ROLE.CREATE);        // /api/v1/role/create/
+console.log(API_URLS.ADDRESS.CREATE);     // /api/v1/address/create/
+console.log(API_URLS.CATEGORY.LIST);      // /api/v1/category/list/
+console.log(API_URLS.COMPANY.DETAIL('id')); // /api/v1/company/detail/id/
+```
+
+## Address Management APIs
+
+### Create Address
+```typescript
+import { useCreateAddressMutation } from '../store/api/apiSlice';
+
+const CreateAddressComponent = () => {
+  const [createAddress, { isLoading }] = useCreateAddressMutation();
+
+  const handleCreate = async () => {
+    try {
+      const result = await createAddress({
+        name: {
+          en: "Uzbekistan",
+          ru: "Узбекистан",
+          uz: "O'zbekiston"
+        },
+        code: 100,
+        parent_id: undefined // Optional
+      }).unwrap();
+      
+      console.log('Address created:', result);
+    } catch (error) {
+      console.error('Failed to create address:', error);
+    }
+  };
+};
+```
+
+### Get Address List
+```typescript
+import { useGetAddressListQuery } from '../store/api/apiSlice';
+
+const AddressListComponent = () => {
+  const { data, isLoading } = useGetAddressListQuery({ page: 1, limit: 10 });
+  
+  if (isLoading) return <div>Loading...</div>;
+  
+  return (
+    <div>
+      <h2>Total: {data?.total}</h2>
+      {data?.items.map(address => (
+        <div key={address.uuid}>
+          <h3>{address.name.uz || address.name.en}</h3>
+          <p>Code: {address.code}</p>
+          {address.children && <p>Children: {address.children.length}</p>}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+### Get Address by UUID
+```typescript
+import { useGetAddressDetailQuery } from '../store/api/apiSlice';
+
+const AddressDetailComponent = ({ addressId }: { addressId: string }) => {
+  const { data: address, isLoading } = useGetAddressDetailQuery(addressId);
+  
+  if (isLoading) return <div>Loading...</div>;
+  
+  return (
+    <div>
+      <h2>{address?.name.uz}</h2>
+      <p>Code: {address?.code}</p>
+      {address?.parent && <p>Parent: {address.parent.name.uz}</p>}
+    </div>
+  );
+};
+```
+
+### Get Address by Code
+```typescript
+import { useGetAddressByCodeQuery } from '../store/api/apiSlice';
+
+const AddressByCodeComponent = () => {
+  const { data: address } = useGetAddressByCodeQuery(100); // Uzbekistan
+  
+  return <div>{address?.name.uz}</div>;
+};
+```
+
+### Update Address
+```typescript
+import { useUpdateAddressMutation } from '../store/api/apiSlice';
+
+const UpdateAddressComponent = ({ addressId }: { addressId: string }) => {
+  const [updateAddress, { isLoading }] = useUpdateAddressMutation();
+
+  const handleUpdate = async () => {
+    try {
+      await updateAddress({
+        id: addressId,
+        data: {
+          name: {
+            en: "Tashkent City",
+            ru: "Город Ташкент",
+            uz: "Toshkent shahri"
+          },
+          code: 100100
+        }
+      }).unwrap();
+      
+      console.log('Address updated');
+    } catch (error) {
+      console.error('Update failed:', error);
+    }
+  };
+};
+```
+
+## Category Management APIs
+
+### Create Category
+```typescript
+import { useCreateCategoryMutation } from '../store/api/apiSlice';
+
+const CreateCategoryComponent = () => {
+  const [createCategory, { isLoading }] = useCreateCategoryMutation();
+
+  const handleCreate = async () => {
+    try {
+      const result = await createCategory({
+        name: {
+          en: "Electronics",
+          ru: "Электроника",
+          uz: "Elektronika"
+        },
+        description: {
+          en: "Devices and gadgets",
+          ru: "Устройства и гаджеты",
+          uz: "Qurilmalar va gadjetlar"
+        }
+      }).unwrap();
+      
+      console.log('Category created:', result);
+    } catch (error) {
+      console.error('Failed to create category:', error);
+    }
+  };
+};
+```
+
+### Get Category List
+```typescript
+import { useGetCategoryListQuery } from '../store/api/apiSlice';
+
+const CategoryListComponent = () => {
+  const { data, isLoading } = useGetCategoryListQuery({ page: 1, limit: 10 });
+  
+  return (
+    <div>
+      <h2>Categories ({data?.total})</h2>
+      {data?.items.map(category => (
+        <div key={category.uuid}>
+          <h3>{category.name.uz}</h3>
+          <p>{category.description.uz}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+### Get Category Detail
+```typescript
+import { useGetCategoryDetailQuery } from '../store/api/apiSlice';
+
+const CategoryDetailComponent = ({ categoryId }: { categoryId: string }) => {
+  const { data: category, isLoading } = useGetCategoryDetailQuery(categoryId);
+  
+  if (isLoading) return <div>Loading...</div>;
+  
+  return (
+    <div>
+      <h2>{category?.name.en}</h2>
+      <p>{category?.description.en}</p>
+    </div>
+  );
+};
+```
+
+### Update Category
+```typescript
+import { useUpdateCategoryMutation } from '../store/api/apiSlice';
+
+const UpdateCategoryComponent = ({ categoryId }: { categoryId: string }) => {
+  const [updateCategory] = useUpdateCategoryMutation();
+
+  const handleUpdate = async () => {
+    await updateCategory({
+      id: categoryId,
+      data: {
+        name: {
+          en: "Updated Electronics",
+          ru: "Обновленная электроника",
+          uz: "Yangilangan elektronika"
+        }
+      }
+    }).unwrap();
+  };
+};
+```
+
+## Company Management APIs
+
+### Create Company
+```typescript
+import { useCreateCompanyMutation } from '../store/api/apiSlice';
+
+const CreateCompanyComponent = () => {
+  const [createCompany, { isLoading }] = useCreateCompanyMutation();
+
+  const handleCreate = async () => {
+    try {
+      const result = await createCompany({
+        name: "O'zbekiston Respublikasi Milliy statistika qo'mitasi",
+        tax_id: "200523428",
+        mobile: "+998332150548",
+        email: "info@stat.uz",
+        address_id: "a9f5d7f1-8764-486a-9697-f0aa4ff02344"
+      }).unwrap();
+      
+      console.log('Company created:', result);
+    } catch (error) {
+      console.error('Failed to create company:', error);
+    }
+  };
+};
+```
+
+### Get Company List
+```typescript
+import { useGetCompanyListQuery } from '../store/api/apiSlice';
+
+const CompanyListComponent = () => {
+  const { data, isLoading } = useGetCompanyListQuery({ page: 1, limit: 10 });
+  
+  return (
+    <div>
+      <h2>Companies ({data?.total})</h2>
+      {data?.items.map(company => (
+        <div key={company.uuid}>
+          <h3>{company.name}</h3>
+          <p>Tax ID: {company.tax_id}</p>
+          <p>Email: {company.email}</p>
+          <p>Mobile: {company.mobile}</p>
+          {company.address && <p>Address: {company.address.name.uz}</p>}
+          {company.children && <p>Child Companies: {company.children.length}</p>}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+### Get Company Detail
+```typescript
+import { useGetCompanyDetailQuery } from '../store/api/apiSlice';
+
+const CompanyDetailComponent = ({ companyId }: { companyId: string }) => {
+  const { data: company, isLoading } = useGetCompanyDetailQuery(companyId);
+  
+  if (isLoading) return <div>Loading...</div>;
+  
+  return (
+    <div>
+      <h2>{company?.name}</h2>
+      <p>Tax ID: {company?.tax_id}</p>
+      <p>Contact: {company?.email} / {company?.mobile}</p>
+      {company?.parent && <p>Parent Company: {company.parent.name}</p>}
+      {company?.address && (
+        <p>Location: {company.address.name.uz} (Code: {company.address.code})</p>
+      )}
+    </div>
+  );
+};
+```
+
+### Update Company
+```typescript
+import { useUpdateCompanyMutation } from '../store/api/apiSlice';
+
+const UpdateCompanyComponent = ({ companyId }: { companyId: string }) => {
+  const [updateCompany, { isLoading }] = useUpdateCompanyMutation();
+
+  const handleUpdate = async () => {
+    try {
+      await updateCompany({
+        id: companyId,
+        data: {
+          name: "Updated Company Name",
+          email: "newemail@company.uz",
+          mobile: "+998901234567"
+        }
+      }).unwrap();
+      
+      console.log('Company updated');
+    } catch (error) {
+      console.error('Update failed:', error);
+    }
+  };
+};
+```
+
+## Multi-Language Support
+
+All entities (Address, Category) support multi-language fields:
+
+```typescript
+// Creating with multiple languages
+const multiLangName = {
+  en: "Tashkent",      // English
+  ru: "Ташкент",       // Russian
+  uz: "Toshkent"       // Uzbek
+};
+
+// Accessing in different languages
+const displayName = address.name.uz || address.name.en || address.name.ru;
+
+// Conditional rendering based on language
+const currentLang = 'uz';
+const categoryName = category.name[currentLang];
+```
+
+## Hierarchical Data (Parent-Child)
+
+Address and Company support hierarchical relationships:
+
+```typescript
+// Create child address
+await createAddress({
+  name: { uz: "Toshkent shahri" },
+  code: 100100,
+  parent_id: "uzbekistan-uuid" // Link to parent
+});
+
+// Access parent/children
+const address = useGetAddressDetailQuery(id);
+console.log(address.parent?.name.uz);          // Parent name
+console.log(address.children?.length);         // Number of children
+
+// Create child company
+await createCompany({
+  name: "Branch Office",
+  parent_id: "main-office-uuid",
+  // ... other fields
+});
 ```

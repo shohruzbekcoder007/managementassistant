@@ -44,6 +44,40 @@ export const ROLE_ENDPOINTS = {
 } as const;
 
 /**
+ * Address Endpoints
+ */
+export const ADDRESS_ENDPOINTS = {
+  CREATE: '/address/create/',
+  LIST: '/address/list',
+  DETAIL: (id: string) => `/address/detail/${id}/`,
+  DETAIL_BY_CODE: (code: number) => `/address/detail-by-code/${code}/`,
+  UPDATE: (id: string) => `/address/update/${id}/`,
+  DELETE: (id: string) => `/address/delete/${id}/`,
+} as const;
+
+/**
+ * Category Endpoints
+ */
+export const CATEGORY_ENDPOINTS = {
+  CREATE: '/category/create/',
+  LIST: '/category/list/',
+  DETAIL: (id: string) => `/category/detail/${id}/`,
+  UPDATE: (id: string) => `/category/update/${id}/`,
+  DELETE: (id: string) => `/category/delete/${id}/`,
+} as const;
+
+/**
+ * Company Endpoints
+ */
+export const COMPANY_ENDPOINTS = {
+  CREATE: '/company/create/',
+  LIST: '/company/list/',
+  DETAIL: (id: string) => `/company/detail/${id}/`,
+  UPDATE: (id: string) => `/company/update/${id}/`,
+  DELETE: (id: string) => `/company/delete/${id}/`,
+} as const;
+
+/**
  * Helper function to build full API URL
  */
 export const buildApiUrl = (endpoint: string): string => {
@@ -80,6 +114,31 @@ export const API_URLS = {
     UPDATE: (id: string) => buildApiUrl(ROLE_ENDPOINTS.UPDATE(id)),
     DELETE: (id: string) => buildApiUrl(ROLE_ENDPOINTS.DELETE(id)),
   },
+  // Address
+  ADDRESS: {
+    CREATE: buildApiUrl(ADDRESS_ENDPOINTS.CREATE),
+    LIST: buildApiUrl(ADDRESS_ENDPOINTS.LIST),
+    DETAIL: (id: string) => buildApiUrl(ADDRESS_ENDPOINTS.DETAIL(id)),
+    DETAIL_BY_CODE: (code: number) => buildApiUrl(ADDRESS_ENDPOINTS.DETAIL_BY_CODE(code)),
+    UPDATE: (id: string) => buildApiUrl(ADDRESS_ENDPOINTS.UPDATE(id)),
+    DELETE: (id: string) => buildApiUrl(ADDRESS_ENDPOINTS.DELETE(id)),
+  },
+  // Category
+  CATEGORY: {
+    CREATE: buildApiUrl(CATEGORY_ENDPOINTS.CREATE),
+    LIST: buildApiUrl(CATEGORY_ENDPOINTS.LIST),
+    DETAIL: (id: string) => buildApiUrl(CATEGORY_ENDPOINTS.DETAIL(id)),
+    UPDATE: (id: string) => buildApiUrl(CATEGORY_ENDPOINTS.UPDATE(id)),
+    DELETE: (id: string) => buildApiUrl(CATEGORY_ENDPOINTS.DELETE(id)),
+  },
+  // Company
+  COMPANY: {
+    CREATE: buildApiUrl(COMPANY_ENDPOINTS.CREATE),
+    LIST: buildApiUrl(COMPANY_ENDPOINTS.LIST),
+    DETAIL: (id: string) => buildApiUrl(COMPANY_ENDPOINTS.DETAIL(id)),
+    UPDATE: (id: string) => buildApiUrl(COMPANY_ENDPOINTS.UPDATE(id)),
+    DELETE: (id: string) => buildApiUrl(COMPANY_ENDPOINTS.DELETE(id)),
+  },
 } as const;
 
 // Export individual endpoints for direct access
@@ -87,4 +146,7 @@ export const {
   AUTH: AUTH_URLS,
   USER: USER_URLS,
   ROLE: ROLE_URLS,
+  ADDRESS: ADDRESS_URLS,
+  CATEGORY: CATEGORY_URLS,
+  COMPANY: COMPANY_URLS,
 } = API_URLS;
