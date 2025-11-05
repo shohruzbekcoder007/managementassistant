@@ -1,0 +1,137 @@
+@use "../../assets/styles/variables" as *;
+
+.transactionList {
+  background: $base-white-100;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid $stroke-color;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .viewAll {
+    background: none;
+    border: none;
+    color: $nav-link-active-color;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(27, 89, 248, 0.1);
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .transactionItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $bg-color;
+    }
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: $bg-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .category {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .aiBadge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .aiIcon {
+    font-size: 10px;
+  }
+
+  .description {
+    font-size: 13px;
+    color: $base-shade-70;
+  }
+
+  .amountWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .amount {
+    font-size: 16px;
+    font-weight: 700;
+
+    &.income {
+      color: #10b981;
+    }
+
+    &.expense {
+      color: #ef4444;
+    }
+  }
+
+  .date {
+    font-size: 12px;
+    color: $base-shade-70;
+  }
+}

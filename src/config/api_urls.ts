@@ -25,10 +25,22 @@ export const AUTH_ENDPOINTS = {
  * User Endpoints
  */
 export const USER_ENDPOINTS = {
+  ME: '/user/me',
   PROFILE: '/user/profile',
   UPDATE_PROFILE: '/user/profile/update',
   CHANGE_PASSWORD: '/user/change-password',
   DELETE_ACCOUNT: '/user/delete',
+} as const;
+
+/**
+ * Role Endpoints
+ */
+export const ROLE_ENDPOINTS = {
+  CREATE: '/role/create/',
+  LIST: '/role/list',
+  DETAIL: (id: string) => `/role/detail/${id}/`,
+  UPDATE: (id: string) => `/role/update/${id}/`,
+  DELETE: (id: string) => `/role/delete/${id}/`,
 } as const;
 
 /**
@@ -54,10 +66,19 @@ export const API_URLS = {
   },
   // User
   USER: {
+    ME: buildApiUrl(USER_ENDPOINTS.ME),
     PROFILE: buildApiUrl(USER_ENDPOINTS.PROFILE),
     UPDATE_PROFILE: buildApiUrl(USER_ENDPOINTS.UPDATE_PROFILE),
     CHANGE_PASSWORD: buildApiUrl(USER_ENDPOINTS.CHANGE_PASSWORD),
     DELETE_ACCOUNT: buildApiUrl(USER_ENDPOINTS.DELETE_ACCOUNT),
+  },
+  // Role
+  ROLE: {
+    CREATE: buildApiUrl(ROLE_ENDPOINTS.CREATE),
+    LIST: buildApiUrl(ROLE_ENDPOINTS.LIST),
+    DETAIL: (id: string) => buildApiUrl(ROLE_ENDPOINTS.DETAIL(id)),
+    UPDATE: (id: string) => buildApiUrl(ROLE_ENDPOINTS.UPDATE(id)),
+    DELETE: (id: string) => buildApiUrl(ROLE_ENDPOINTS.DELETE(id)),
   },
 } as const;
 
@@ -65,4 +86,5 @@ export const API_URLS = {
 export const {
   AUTH: AUTH_URLS,
   USER: USER_URLS,
+  ROLE: ROLE_URLS,
 } = API_URLS;

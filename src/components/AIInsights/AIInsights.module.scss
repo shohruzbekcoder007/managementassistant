@@ -1,0 +1,112 @@
+@use "../../assets/styles/variables" as *;
+
+.aiInsights {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .aiIcon {
+    font-size: 20px;
+    animation: sparkle 2s infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  .badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+
+  .insightsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .insightCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    transition: all 0.3s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
+    }
+
+    &.warning {
+      border-left: 3px solid #fbbf24;
+    }
+
+    &.tip {
+      border-left: 3px solid #60a5fa;
+    }
+
+    &.success {
+      border-left: 3px solid #34d399;
+    }
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .insightTitle {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+  }
+
+  .description {
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+}

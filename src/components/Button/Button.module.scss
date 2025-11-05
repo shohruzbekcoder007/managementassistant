@@ -55,6 +55,21 @@
   width: 100%;
 }
 
+.small {
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.medium {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+.large {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
 .loader {
   display: inline-block;
   animation: pulse 1.5s ease-in-out infinite;

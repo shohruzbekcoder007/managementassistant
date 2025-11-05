@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState, UserData } from '../../types/auth.types';
+import { PermissionService } from '../../services/permission.service';
 
 const initialState: AuthState = {
   user: null,
@@ -9,6 +10,7 @@ const initialState: AuthState = {
   isAuthenticated: !!localStorage.getItem('authToken'),
   isLoading: false,
   error: null,
+  permissions: null,
 };
 
 const authSlice = createSlice({
@@ -23,6 +25,8 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isAuthenticated = true;
       state.error = null;
+      // Calculate permissions based on user role
+      state.permissions = PermissionService.getPermissionsByRole(action.payload.user.role);
       localStorage.setItem('authToken', action.payload.token);
     },
     logout: (state) => {
@@ -30,6 +34,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.error = null;
+      state.permissions = null;
       localStorage.removeItem('authToken');
     },
     setError: (state, action: PayloadAction<string>) => {
