@@ -1,5 +1,5 @@
-@import "../../assets/styles/mixins";
-@import "../../assets/styles/variables";
+@use "../../assets/styles/mixins" as *;
+@use "../../assets/styles/variables" as *;
 
 .sidebar {
   height: 100vh;
